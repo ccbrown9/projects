@@ -165,7 +165,7 @@ void *removeCDA(CDA *items,int index)
     return temp; 
 }
 
-//Joins together two different CDAs
+//Joins together two different CDAs placing the donor array to the end of the recipient. Donor array results in empty.
 void unionCDA(CDA *recipient,CDA *donor)
 {
     for(int i = 0; i < donor->size; i++)
