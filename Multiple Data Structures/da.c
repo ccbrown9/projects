@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <assert.h>
 
-// Bulds "da" struct with pointers
+// Builds "da" struct with pointers
 typedef struct da {
     int size;
     int capacity;
@@ -34,11 +34,14 @@ void  setDAdisplay(DA *items,void (*d)(void *,FILE *)){
     return;
 }
 
+//Passed a function that knows how to display the generic value store in an array slot.
 void  setDAfree(DA *items,void (*f)(void *)){
     items->free = f;
     return;
 }
 
+
+//Places the given item at the the slot named by given index.
 void insertDA(DA *items,int index, void *value){
 
 
@@ -60,7 +63,7 @@ void insertDA(DA *items,int index, void *value){
         items->array[index] = value;
         items->size++;
     }
-    //Case 2: insert at index and move remaining elements higher in array. Executes in linear time
+    //Case 2: insert at index and move remaining elements higher in array. Executes in linear time.
   
        
     else{
@@ -84,7 +87,8 @@ void insertDA(DA *items,int index, void *value){
     return;
 }
 
-void *removeDA(DA *items,int index){   //Add code to not shrink below 1
+//Removes the item at the given index.
+void *removeDA(DA *items,int index){   
     
     assert(items->size > 0);
     
@@ -119,15 +123,14 @@ void *removeDA(DA *items,int index){   //Add code to not shrink below 1
         items->capacity = items->capacity / 2;
         }
         
-        //for(int i = items->size; i <= items->capacity; i++){
-          // items->array[i] = NULL;
-        //}
+       
     }
      
     //Returns value to be removed
     return temp;
 }
 
+//Takes two arrays and moves all the items in the donor array to the recipient array.
 void unionDA(DA *recipient,DA *donor){
     // Case 1: If donor is empty do nothing
     if(donor->size == 0){
@@ -140,7 +143,7 @@ void unionDA(DA *recipient,DA *donor){
     return;
 }
 
-//The get method returns the value at the given index. It should run in constant time.
+//Returns the value at the given index. Runs in constant time.
 void *getDA(DA *items,int index){
     
     assert((index >= 0) && (index < items->size));
@@ -166,10 +169,12 @@ void *setDA(DA *items,int index,void *value){
     
 }
 
+//Returns the number of items stored in the array. Runs in Amortized constant time.
 int sizeDA(DA *items){
     return items->size;
 }
 
+//Displays the entire array.
 void  displayDA(DA *items,FILE *fp){
     int emptySlots = 0;
     fprintf(fp, "[");
@@ -204,7 +209,7 @@ return;
 }
 
 
-//Frees all elements of the array.
+//Frees all elements of the array unless no free method is currently set.
 void freeDA(DA *items){
     for(int i = 0; i <= items->size; i++){
         items->array[i] = NULL;
@@ -215,7 +220,7 @@ void freeDA(DA *items){
     return;
 }
 
-
+//Sets and internal flag in the object to the given value . If flag > 0 display method adds a comma and the number of empty slots immediately after the last element.
 int debugDA(DA *items,int level){
     int temp = items->debug;
     items->debug = level;
