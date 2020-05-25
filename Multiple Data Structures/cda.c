@@ -187,7 +187,7 @@ void *getCDA(CDA *items,int index)
     return items->array[get];
 }
 
-//.....
+//Updates a value at a given index from the perspective of a user.
 void *setCDA(CDA *items,int index,void *value)
 {
     assert(index >= (-1) && index<= items->size);
