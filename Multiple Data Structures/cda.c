@@ -18,7 +18,7 @@
   
 };
 
-
+// Allocation of new CDA. Initialized capacity to 1.
 CDA *newCDA(void)
 {
     CDA *newCDA = malloc(sizeof(CDA));
@@ -38,19 +38,21 @@ CDA *newCDA(void)
     return newCDA;
 }
 
-
+//Determination of rather the CDA is to be displayed or not.
 void setCDAdisplay(CDA *items, void (*d)(void *,FILE *))
 {
     items->display = d;
 }
 
+//Determination of rather the CDA is to be freed or not
 void setCDAfree(CDA *items, void (*f)(void *))
 {
     items->free = f;
 }
 
 
-
+//Insertion into CDA. Determines if request is in the beginning of the CDA, end, first half, or last half. 
+//If the size of the CDA is at its capacity, the CDA grows at a multiple of two
 void insertCDA(CDA *items,int index,void *value) 
 {
    
@@ -115,6 +117,7 @@ void insertCDA(CDA *items,int index,void *value)
     }
 }
 
+//Removes an item from the CDA. If CDA is less than one fourth of the capcity, CDA shrinks by one half. 
 void *removeCDA(CDA *items,int index)
 {
     assert(index >= 0 && index <= items->size);
@@ -162,6 +165,7 @@ void *removeCDA(CDA *items,int index)
     return temp; 
 }
 
+//Joins together two different CDAs
 void unionCDA(CDA *recipient,CDA *donor)
 {
     for(int i = 0; i < donor->size; i++)
@@ -173,6 +177,8 @@ void unionCDA(CDA *recipient,CDA *donor)
     donor->capacity = 1;
 }
 
+
+//Retrieves the desired index in the CDA based on where the start position is.
 void *getCDA(CDA *items,int index)
 {
     
@@ -181,6 +187,7 @@ void *getCDA(CDA *items,int index)
     return items->array[get];
 }
 
+//.....
 void *setCDA(CDA *items,int index,void *value)
 {
     assert(index >= (-1) && index<= items->size);
@@ -193,11 +200,13 @@ void *setCDA(CDA *items,int index,void *value)
     return temp;
 }
 
+//Retrieves how many items are in the CDA.
 int  sizeCDA(CDA *items)
 {
     return items->size;
 }
 
+// Displays the items in a CDA.
 void displayCDA(CDA *items,FILE *fp)
 {   
     fprintf(fp,"(");
@@ -273,6 +282,7 @@ void displayCDA(CDA *items,FILE *fp)
  
 }
 
+// Sets an internal flag in the object to the given value. If flag = 0, display method adds a comma and the number of empty slots immediately after the last element.
 
 int  debugCDA(CDA *items,int level)
 {
@@ -283,7 +293,7 @@ int  debugCDA(CDA *items,int level)
     return temp;
 }
 
-
+//Fress a CDA completely, including all items.
 void freeCDA(CDA *items)
 {
     if (items->free != 0)
