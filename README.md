@@ -6,11 +6,11 @@ Huffman Tree
 
 Multiple Data Strucutes include the following:
 
--Circular Dynamic Array
--Dynamic Array
--Stack
--Queue
+- Circular Dynamic Array
+- Dynamic Array
+- Stack
+- Queue
 
 Red Black Tree
 
--Self Balancing binary search tree which each node having a specific color identified as a bit to ensure balance during insertion and deletions.
+- Self Balancing binary search tree which each node having a specific color identified as a bit to ensure balance during insertion and deletions.
