@@ -4,7 +4,7 @@ A collection of programming projects completed by Charity Brown
 Huffman Tree
 - A full binary tree with each leaf corresponding to a letter.
 
-Multiple Data Strucutes 
+Multiple Data Structures 
 
 - Circular Dynamic Array
 - Dynamic Array
