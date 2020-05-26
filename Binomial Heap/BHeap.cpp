@@ -14,7 +14,6 @@ template<typename keytype, typename valuetype>
 class BHeap
 {
     struct node{
-    //int n;
     keytype key;
     valuetype value;
     int degree;
@@ -57,6 +56,8 @@ BHeap(){
             Hr = Initializeheap();
             int count = 0;
 }
+	
+//Deconstructor
 ~BHeap(){
     H = NULL;
 }
@@ -65,6 +66,10 @@ void operator=(BHeap<keytype, valuetype> &H1){
     this->H = H1->H;
     this->count = H1->count;
 }
+	
+/*For this constructor the heap should be built using the arrays K and V containing s items of keytype and valuetype.
+* Runs in O(s).
+*/
  BHeap(keytype k[], valuetype V[], int s){
      H = Initializeheap();
      count = 0;
@@ -98,6 +103,7 @@ node* Inserthelp(node* H, node* x){
     return H;
 }
 
+//Inserts the key k and value v pair into the heap. Runs in O(lg n).
 void insert(keytype k, valuetype V){    
    
  node* p = new node;
@@ -151,7 +157,8 @@ node* Union(node* H1, node* H2){
     return H;
 }
 /*
- * mergeHelp Nodes in Binomial Heap
+ * mergeHelp Nodes in Binomial Heap .
+ *Merges Heap 2 into current Heap. Runs in O(lg n)
  */
 void merge(BHeap<keytype,valuetype> &H1){
     
@@ -198,19 +205,19 @@ node* mergeHelp(node* H1, node* H2){
     return H;
 }
 /*
- * Display Binomial Heap
+ * Display Binomial Heap with PreOrder Traversal
  */
 void preOrder(node *x){
 
  if (x != NULL) {
-        //cout << "B" << x->degree;
+     
         cout << x->key << " ";
            
         preOrder(x->child);
          
         preOrder(x->sibling);
         
-        //preOrder(x->sibling);
+        
     }
     
     return;
@@ -230,35 +237,14 @@ void printKey(){
         cout << p->key << " of degree B" << p->degree << " ";
         p = p->sibling;
     }
-    //cout << "B" << H->sibling->degree << endl;
-   //preOrder(H->sibling);
-   cout << endl;
-  // preOrderSibling(H);
-   //cout << endl;
    
+   cout << endl;
 
-    /*
-    node* p;
-    p = H;
-    while (p != NULL) {
-        cout << "B"<< p->degree << endl;
-        cout<<p->key << " ";
-        node *temp = p;
-        while(temp->child != NULL){
-            cout << temp->child->key << " ";
-            temp = temp->child;
-        }
-
-        
-        if (p->sibling != NULL)
-            cout<<endl;
-        p = p->sibling;
-    }
-    */
-    //cout<<endl;
+   
 }
 /*
- * Extract Minimum
+ * Extract Minimum - Removes the minimum key in the heap and
+returns the key. Runs in O(lg n)
  */
 keytype extractMin(){
     node *H1 = H;
@@ -317,7 +303,7 @@ int Revert_list(node* y){
  * Search Nodes in Binomial Heap
  */
 
-
+//Returns the minimum key in the heap without modifiying the heap. Runs in O(lg n).
 keytype peakKey(){
  
     
@@ -336,7 +322,7 @@ keytype peakKey(){
     
 }
 
-
+//Returns the value associated with the minimum key in the heap without modifiying the heap. Runs in O(lg n).
 valuetype peakValue(){
     node *x = H;
     valuetype temp = x->value;
