@@ -1,8 +1,11 @@
 # projects
 A collection of programming projects completed by Charity Brown
 
+Binomial Heap
+- A collection of binomial trees that are linked together where each tree is an ordered heap.
+
 Huffman Tree
-- A full binary tree with each leaf corresponding to a letter.
+- A full binary tree with each leaf corresponding to a character.
 
 Multiple Data Structures 
 
@@ -11,6 +14,4 @@ Multiple Data Structures
 - Stack
 - Queue
 
-Red Black Tree
 
-- Self Balancing binary search tree which each node having a specific color identified as a bit to ensure balance during insertion and deletions.
