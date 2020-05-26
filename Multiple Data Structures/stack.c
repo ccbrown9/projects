@@ -5,6 +5,8 @@
 #include <stdlib.h>
 #include <assert.h>
 
+
+// This stack uses a Dynamic Array for storage
     typedef struct stack {
     DA *itemsDA;    
     int capacity;
@@ -14,7 +16,7 @@
 }STACK;
     
     
-    
+// Initialization of new stack 
      STACK *newSTACK(void){
              //d is the display function
             //f is the freeing function
@@ -39,23 +41,28 @@ void  setSTACKfree(STACK *items, void (*f)(void *)){
     setDAfree(items->itemsDA, f);
     return;
     }
-  
+
+// Pushes an item to the stack. Runs in constant or amortized constant time.
 void  push(STACK *items,void *value){
     insertDA(items->itemsDA, sizeDA(items->itemsDA), value);
     return;
 }
 
+// Removes the item to be popped. Runs in constant or amortized constant time.
 void *pop(STACK *items){
     assert(sizeDA(items->itemsDA) > 0);
     void *temp = removeDA(items->itemsDA, sizeDA(items->itemsDA) - 1);
     return temp;
 }
 
+// Returns the value ready to come off the stack, but leaves the stack unchanged. Runs in constant time.
 void *peekSTACK(STACK *items){
     assert(sizeDA(items->itemsDA) > 0);
     void *temp = getDA(items->itemsDA, 0);
     return temp;
 }
+
+//Prints the items stored in the stack
 void displaySTACK(STACK *items,FILE *fp){
     if(items->debug == 1){
         debugDA(items->itemsDA, 0);
@@ -94,7 +101,8 @@ return;
 }
 
 
-
+// If debug level = 1, the display method uses the underlying data structure's display method. 
+//If the debug method = 2, the display method uses the underlying data structure's debugged display method.
 int debugSTACK(STACK *items,int level){
     int temp = items->debug;
     items->debug = level;
@@ -102,11 +110,14 @@ int debugSTACK(STACK *items,int level){
     return temp;
 }
 
+
+//If no free method is set, the individual items are not freed. In any case, the array and its supporting allocations are freed.
 void  freeSTACK(STACK *items){
     freeDA(items->itemsDA);
     return;
 }
 
+//Returns the size of the stack.
 int  sizeSTACK(STACK *items){
     return sizeDA(items->itemsDA);
   
