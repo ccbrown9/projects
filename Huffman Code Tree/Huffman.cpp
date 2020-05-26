@@ -1,4 +1,4 @@
-//Charity Brown - Project 4 CS 101 - Dixon
+
 
 #include <iostream>
 #include <fstream>
@@ -7,7 +7,8 @@
 
 using namespace std;
 
-Huffman :: Huffman(Node **arr, int len) { //Allocates Space
+//Initialization and Space Allocation for Huffman
+Huffman :: Huffman(Node **arr, int len) { 
     size = len;
     int i;
     child = new Node *[size];      
@@ -26,7 +27,9 @@ i = 0;
         bubbleDown(i);
 }
 }
-void Huffman :: bubbleDown(int index) { //Swaps out of order nodes
+
+//Swaps nodes that are out of order by bubbling down
+void Huffman :: bubbleDown(int index) { 
     int left = 2 * index + 1;
     int right = 2 * index + 2;
     int min = index;
@@ -50,7 +53,8 @@ void Huffman :: bubbleDown(int index) { //Swaps out of order nodes
     }
 }
 
-void Huffman :: addTo(Node *newNode) { //Creating Heap
+//Creation of heap
+void Huffman :: addTo(Node *newNode) { 
     child[size] = new Node;        
     child[size] = newNode;
     size++;
@@ -60,7 +64,8 @@ void Huffman :: addTo(Node *newNode) { //Creating Heap
         }
 }
 
-Node *Huffman :: remove() {  // Removes root from heap 
+//Removes the root node from the heap
+Node *Huffman :: remove() {  
     Node *temp = child[0];     
     child[0] = child[size-1]; 
     size--;
@@ -69,7 +74,8 @@ Node *Huffman :: remove() {  // Removes root from heap
     return temp;
 }
 
-void Huffman :: createHuffman() { //Changes heap to huffman
+// Creats a Huffman Tree from the Heap
+void Huffman :: createHuffman() { 
     Node *x = new Node;
     Node *y = new Node;
 
@@ -87,7 +93,8 @@ void Huffman :: createHuffman() { //Changes heap to huffman
     }
 }
 
-void Huffman :: createCode(Node *root, string str, ofstream& out) { // Makes code from left huffman 0 and right huffman 1
+// Changes code : left child in heap = 0 in  and right child in heap = 1 in huffman
+void Huffman :: createCode(Node *root, string str, ofstream& out) { 
     if (root == NULL){           
         return;
         }
@@ -100,6 +107,7 @@ void Huffman :: createCode(Node *root, string str, ofstream& out) { // Makes cod
     createCode(root->right, str + "1", out);
 }
 
+//InOrder Traversal of Tree
 void Huffman :: inOrder(Node *root, ofstream& out) {
     if (root == NULL){
         return;
@@ -110,6 +118,7 @@ void Huffman :: inOrder(Node *root, ofstream& out) {
     inOrder(root->right, out);
 }
 
+//PreOrder traversal of tree
 void Huffman :: preOrder(Node *root, ofstream& out) {
     if (root == NULL){
         return;
@@ -120,7 +129,8 @@ void Huffman :: preOrder(Node *root, ofstream& out) {
     preOrder(root->right, out);
 }
 
-void Huffman :: encode(Node *root, unsigned char ch, ofstream& out) { //moves through tree to assign code
+//Traverses through tree to assign code
+void Huffman :: encode(Node *root, unsigned char ch, ofstream& out) { 
     if (root->left == NULL && root->right == NULL) {    
         if (root->identifier == ch)               
             out << root->code;
